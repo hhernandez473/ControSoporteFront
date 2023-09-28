@@ -18,13 +18,7 @@ export class LoginComponent implements OnInit {
     private usuarioService: ApiService
   ) {
 
-    if (environment.production) {
-      console.log('La aplicación se está ejecutando en modo producción.');
-      // Realiza acciones específicas para el modo de producción
-    } else {
-      console.log('La aplicación se está ejecutando en modo desarrollo.');
-      // Realiza acciones específicas para el modo de desarrollo
-    }
+
   }
 
   ngOnInit(): void {
@@ -49,7 +43,6 @@ export class LoginComponent implements OnInit {
   }
 
   private loginSuccess(token: string){
-    debugger;
     localStorage.setItem("x-token", JSON.stringify(token));
     this.router.navigate(["/dashboard"]);
   }

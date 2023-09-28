@@ -16,6 +16,9 @@ import { ValidarSesionGuard } from './authentication/guards/validar-sesion.guard
 import { ApiService } from './core/service/api.service';
 
 
+
+
+
 @NgModule({
   imports: [
     BrowserAnimationsModule,
@@ -31,6 +34,9 @@ import { ApiService } from './core/service/api.service';
   declarations: [
     AppComponent,
     AdminLayoutComponent,
+
+
+
 
 
   ],
