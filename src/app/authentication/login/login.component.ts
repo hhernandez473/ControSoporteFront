@@ -3,19 +3,20 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ApiService } from '../../core/service/api.service';
-import { environment } from '../../../environments/environment';
+import { ShowAlertToastService } from '../../core/service/show-alert-toast.service';
 @Component({
   selector: "app-login",
   templateUrl: "./login.component.html",
-  styleUrls: ["./login.component.css"],
+  styleUrls: ["./login.component.scss"],
 })
 export class LoginComponent implements OnInit {
   loginForm: FormGroup;
-
+  hide = true;
   constructor(
     private router: Router,
     private fb: FormBuilder,
-    private usuarioService: ApiService
+    private usuarioService: ApiService,
+    private ShowAlertToastService: ShowAlertToastService
   ) {
 
 
@@ -23,7 +24,7 @@ export class LoginComponent implements OnInit {
 
   ngOnInit(): void {
     this.loginForm = this.fb.group({
-      correo: ["", Validators.required],
+      correo: ["", [Validators.required, Validators.email]],
       password: ["", Validators.required],
     });
   }
@@ -32,18 +33,22 @@ export class LoginComponent implements OnInit {
     if (this.loginForm.valid) {
       this.usuarioService.post("auth/login", this.loginForm.value).subscribe(
         (resp: any) => {
-          this.loginSuccess( resp.token);
+          const userName = `${resp.usuario.nombres} ${resp.usuario.apellidos}`
+          this.loginSuccess(resp.token, userName);
         },
         (error: HttpErrorResponse) => {
           // Si sucede un error
-          console.error(error);
+          this.ShowAlertToastService.errorAlert(error.error.msg);
         }
       );
     }
   }
 
-  private loginSuccess(token: string){
+  private loginSuccess(token: string, usuario: string){
     localStorage.setItem("x-token", JSON.stringify(token));
+    localStorage.setItem("userName", usuario);
     this.router.navigate(["/dashboard"]);
   }
+
+
 }

@@ -1,8 +1,10 @@
+import { Planned } from "./RespPlanned";
+
+
 export interface RespHomeVisits {
   codigo:         number;
   msg:            string;
-  totalRegistros: number;
-  datos:          HomeVisit[];
+  visitas:          HomeVisit[];
 }
 
 export interface HomeVisit {
@@ -21,4 +23,9 @@ export interface HomeVisit {
   modificado_el:  Date;
   modificado_por: string;
   uid:            string;
+}
+
+export interface VisitPlanned {
+  visit?: HomeVisit,
+  planned: Planned
 }

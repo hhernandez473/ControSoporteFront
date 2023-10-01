@@ -51,7 +51,8 @@ export class PlannedComponent implements OnInit {
       idPlanned: data?.idPlanned || "",
       idCliente: data?.idCliente || "",
       cliente: [customer || "", [Validators.required]],
-      usuario: [data?.usuario || "", [Validators.required]],
+      usuario: [data?.usuario._id || "", [Validators.required]],
+      descripcion: [data?.descripcion || "", [Validators.required]],
       fecha_programada: [data?.fecha_programada || "", [Validators.required]],
       situacion: [data?.situacion || "", [Validators.required]],
     });
@@ -62,7 +63,7 @@ export class PlannedComponent implements OnInit {
       this.plannedForm.markAllAsTouched();
       return;
     }
-    this.plannedForm.controls['uid'] ? this.updatePlanned(): this.savePlanned();
+    this.plannedForm.controls['uid'].value? this.updatePlanned(): this.savePlanned();
   }
 
   resetForm(){
@@ -82,6 +83,7 @@ export class PlannedComponent implements OnInit {
         "idCliente": rest.cliente.idcliente,
         "cliente": rest.cliente.uid,
         "usuario": usuario,
+        'descripcion': rest.descripcion,
         "fecha_programada": fecha_programada,
         "situacion": situacion
       })
@@ -110,6 +112,7 @@ export class PlannedComponent implements OnInit {
       .put(`planneds/${uid}`, {
         "idCliente": rest.cliente.idcliente,
         "cliente": rest.cliente.uid,
+        'descripcion': rest.descripcion,
         "usuario": usuario,
         "fecha_programada": fecha_programada,
         "situacion": situacion

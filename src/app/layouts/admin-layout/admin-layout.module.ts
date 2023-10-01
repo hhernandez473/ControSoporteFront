@@ -19,6 +19,9 @@ import {MatDatepickerModule} from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import { PlannedComponent } from '../../planned/planned.component';
 import { HomeVisitsComponent } from '../../home-visits/home-visits.component';
+import { VisitsAttentionComponent } from '../../visits-attention/visits-attention.component';
+import {MatDialogModule} from '@angular/material/dialog';
+
 @NgModule({
   imports: [
     CommonModule,
@@ -34,7 +37,8 @@ import { HomeVisitsComponent } from '../../home-visits/home-visits.component';
     MatInputModule,
     MatSelectModule,
     MatDatepickerModule,
-    MatNativeDateModule
+    MatNativeDateModule,
+    MatDialogModule,
 
   ],
   declarations: [
@@ -43,7 +47,8 @@ import { HomeVisitsComponent } from '../../home-visits/home-visits.component';
     RoutesComponent,
     CustomersComponent,
     PlannedComponent,
-    HomeVisitsComponent
+    HomeVisitsComponent,
+    VisitsAttentionComponent
   ]
 })
 
